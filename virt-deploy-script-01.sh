@@ -28,9 +28,9 @@ ip5=`virt-deploy create vm-test-05 centos-7.1 -o memory=2048 password=pass | gre
 echo "Edit VMs on etc/hosts"
 echo "---------------------"
 echo "$ip2    vm-test-02.example.com vm-test-02" >> /etc/hosts
-echo "$ip3    vm-test-02.example.com vm-test-03" >> /etc/hosts
-echo "$ip4    vm-test-02.example.com vm-test-04" >> /etc/hosts
-echo "$ip5    vm-test-02.example.com vm-test-05" >> /etc/hosts
+echo "$ip3    vm-test-03.example.com vm-test-03" >> /etc/hosts
+echo "$ip4    vm-test-04.example.com vm-test-04" >> /etc/hosts
+echo "$ip5    vm-test-05.example.com vm-test-05" >> /etc/hosts
 
 echo "Start VMs"
 echo "---------"
