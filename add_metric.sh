@@ -25,3 +25,6 @@ oc get pods -n openshift-infra
 
 # when casndra, hawkular and heapster are all running, test
 curl -X GET https://vm-vm-test-02/hawkular/metrics/status --insecure
+
+# create route for comunicating with manageiq
+oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --selector='kubernetes.io/hostname=vm-vm-test-02' --stats-port=1937 --host-network=false
