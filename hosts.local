@@ -1,0 +1,26 @@
+# This is an example of a bring your own (byo) host inventory
+
+# Create an OSEv3 group that contains the masters and nodes groups
+[OSEv3:children]
+masters
+nodes
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+ansible_sudo=true
+deployment_type=origin
+openshift_use_manageiq=True
+
+
+# host group for masters
+[masters]
+vm-test-02
+
+# host group for nodes
+[nodes]
+vm-test-02 openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
+vm-test-03 openshift_node_labels="{'region':'primary','zone':'east'}"
+
