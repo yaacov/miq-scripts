@@ -27,5 +27,5 @@ echo "$ip3    vm-test-03.example.com vm-test-03" >> /etc/hosts
 echo "Start VMs"
 echo "---------"
 virt-deploy start vm-test-02-centos-7.1-x86_64
-virt-deploy start vm-test-03-centos-7.1-x86_64f
+virt-deploy start vm-test-03-centos-7.1-x86_64
 
