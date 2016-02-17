@@ -24,4 +24,4 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-vm-test-02,USE_PERSIS
 oc get pods -n openshift-infra
 
 # when casndra, hawkular and heapster are all running, test
-curl -X GET https://vm-vm-test-02/hawkular/metrics/status
+curl -X GET https://vm-vm-test-02/hawkular/metrics/status --insecure
