@@ -4,7 +4,6 @@
 #    oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}' | grep management-admin-token
 # use the management-admin-token found in next command
 #    oc get -n management-infra secrets management-admin-token-q5msc --template='{{.data.token}}' | base64 -d
-# ADMINTOKEN=`oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}' | grep token`
 
 # cleaning up
 # oc delete all --selector=metrics-infra -n openshift-infra
