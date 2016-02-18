@@ -23,9 +23,9 @@ Remove VMs from local machine
 
 # hosts.local
 
-Openshift ansible hosts file for local machine
+A host file for openshift-ansible ansible-playbook
 
 ```
 > # from inside openshift-ansible directory
-> ansible-playbook playbooks/byo/config.yml -i <PATH>/hosts.local
+> ansible-playbook <PATH-TO-OPENSHIFT-ANSIBLE>/playbooks/byo/config.yml -i hosts.local
 ```

@@ -1,5 +1,8 @@
 # This is an example of a bring your own (byo) host inventory
 
+# A host file for openshift-ansible ansible-playbook
+# ansible-playbook <PATH>/playbooks/byo/config.yml -i hosts.local
+
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
 masters
@@ -13,7 +16,6 @@ ansible_ssh_user=root
 ansible_sudo=true
 deployment_type=origin
 openshift_use_manageiq=True
-
 
 # host group for masters
 [masters]

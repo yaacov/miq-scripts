@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$EUID" -eq 0 ]
+  then echo "Please run as regular user"
+  exit
+fi
+
 echo "Remove ssh fingerprints"
 echo "-----------------------"
 ssh-keygen -R "vm-test-02"
