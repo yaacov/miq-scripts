@@ -14,11 +14,19 @@ Set VMs ssh authentication
 > bash virt-deploy-script-02.sh
 ```
 
-## virt-deploy-script-03
+## delete-vm
 
 Remove VMs from local machine
 ```
-> bash virt-deploy-script-03.sh
+> bash delete-vm.sh
+```
+
+## add-metric
+
+Add metric to the openshift
+[Run on the master VM.]
+```
+> bash add-metric.sh
 ```
 
 # hosts.local

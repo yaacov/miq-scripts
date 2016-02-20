@@ -2,6 +2,7 @@
 
 # A host file for openshift-ansible ansible-playbook
 # ansible-playbook <PATH>/playbooks/byo/config.yml -i hosts.local
+#   e.g. ansible-playbook ../openshift-ansible/playbooks/byo/config.yml -i hosts.local
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -13,7 +14,6 @@ nodes
 
 # SSH user, this user should allow ssh based auth without requiring a password
 ansible_ssh_user=root
-ansible_sudo=true
 deployment_type=origin
 openshift_use_manageiq=True
 
@@ -23,6 +23,6 @@ vm-test-02
 
 # host group for nodes
 [nodes]
-vm-test-02 openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
-vm-test-03 openshift_node_labels="{'region':'primary','zone':'east'}"
+vm-test-02 openshift_schedulable=true
+vm-test-03
 

@@ -1,15 +1,23 @@
 #!/bin/bash
 
-# getting the token
-#    oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}' | grep management-admin-token
-# use the management-admin-token found in next command
-#    oc get -n management-infra secrets management-admin-token-q5msc --template='{{.data.token}}' | base64 -d
-
 # cleaning up
+# -----------
+
 # oc delete all --selector=metrics-infra -n openshift-infra
 # oc delete secrets --selector=metrics-infra -n openshift-infra
 # oc delete sa --selector=metrics-infra -n openshift-infra
 # oc delete templates --selector=metrics-infra -n openshift-infra
+
+# add line to /etc/origin/master/master-config.yaml
+# assetConfig:
+# etricsPublicURL: https://vm-test-02/hawkular/metrics
+# and then reboot
+sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02/hawkular/metrics" /etc/origin/master/master-config.yaml
+
+# getting the openshift provider token
+# ------------------------------------
+
+secret=`oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}' | grep management-admin-token | head -n 1`; oc get -n management-infra secrets $secret --template='{{.data.token}}' | base64 -d > token.txt; cat token.txt; echo
 
 # create the metric pods
 # ----------------------
@@ -29,17 +37,8 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02,USE_PERSISTEN
 # create route for comunicating with manageiq
 oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --selector='kubernetes.io/hostname=vm-test-02' --stats-port=1937 --host-network=false
 
-# install vim
-yum install vim
-
-echo "MAUNUAL SETPS"
-echo "add line to /etc/origin/master/master-config.yaml"
-echo "assetConfig:"
-echo "metricsPublicURL: https://vm-test-02/hawkular/metrics"
-echo "and then reboot"
-
 # check all
-# ------------------
+# ---------
 
 # check the metric pods
 oc get pods -n openshift-infra
