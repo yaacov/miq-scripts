@@ -23,6 +23,6 @@ vm-test-02
 
 # host group for nodes
 [nodes]
-vm-test-02 openshift_schedulable=true
-vm-test-03
+vm-test-02 openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
+vm-test-03 openshift_node_labels="{'region':'primary','zone':'east'}"
 
