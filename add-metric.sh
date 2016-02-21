@@ -28,8 +28,10 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02,USE_PERSISTEN
 # check all
 # ---------
 
-# check the metric pods
-oc get pods -n openshift-infra
+# watch the metric pods until all are running
+oc get pods --all-namespaces -w
+
+# oadm registry --config=/etc/origin/master/admin.kubeconfig --credentials=/etc/origin/master/openshift-registry.kubeconfig 
 
 # wait for casndra, hawkular and heapster pods to run then test
 curl -X GET https://vm-test-02/hawkular/metrics/status --insecure

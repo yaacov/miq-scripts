@@ -21,8 +21,8 @@ sed '/\.example\.com vm-test-/d' -i /etc/hosts
 
 echo "Create VMs"
 echo "----------"
-ip2=`virt-deploy create test-02 centos-7.1 -o memory=4096 password=pass | grep 'ip address:' | cut -d: -f2`
-ip3=`virt-deploy create test-03 centos-7.1 -o memory=4096 password=pass | grep 'ip address:' | cut -d: -f2`
+ip2=`virt-deploy create test-02 centos-7.1 -o memory=3072 password=pass | grep 'ip address:' | cut -d: -f2`
+ip3=`virt-deploy create test-03 centos-7.1 -o memory=2048 password=pass | grep 'ip address:' | cut -d: -f2`
 
 echo "Edit VMs on etc/hosts"
 echo "---------------------"
