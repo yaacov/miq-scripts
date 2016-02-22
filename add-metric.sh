@@ -17,7 +17,7 @@ secret=`oc get -n management-infra sa/management-admin --template='{{range .secr
 # ----------------------
 
 # add metrics public url to master confiv file
-sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02/hawkular/metrics" /etc/origin/master/master-config.yaml
+sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
 
 # make the default node to be infra
 sed -i s/defaultNodeSelector:\ \"\"/defaultNodeSelector:\ \"region=infra\"/g /etc/origin/master/master-config.yaml
@@ -29,7 +29,7 @@ oc create -f metrics-deployer-setup.yaml -n openshift-infra
 oadm policy add-role-to-user edit system:serviceaccount:openshift-infra:metrics-deployer -n openshift-infra
 oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
 oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
-oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
+oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02.example.com,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
 
 # check all
 # ---------
@@ -38,7 +38,7 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02,USE_PERSISTEN
 oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-curl -X GET https://vm-test-02/hawkular/metrics/status --insecure
+curl -X GET https://vm-test-02.example.com/hawkular/metrics/status --insecure
 
 # create route to hawkular
 # ------------------------

@@ -19,10 +19,10 @@ openshift_use_manageiq=True
 
 # host group for masters
 [masters]
-vm-test-02
+vm-test-02.example.com
 
 # host group for nodes
 [nodes]
-vm-test-02 openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
-vm-test-03 openshift_node_labels="{'region':'primary','zone':'default'}"
+vm-test-02.example.com openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
+vm-test-03.example.com openshift_node_labels="{'region':'primary','zone':'default'}"
 

@@ -7,13 +7,13 @@ fi
 
 echo "Delete VMs"
 echo "----------"
-virt-deploy delete test-02-centos-7.1-x86_64
-virt-deploy delete test-03-centos-7.1-x86_64
+virt-deploy delete test-02.example.com-centos-7.1-x86_64
+virt-deploy delete test-03.example.com-centos-7.1-x86_64
 
 echo "Delete VMs images from lib cache"
 echo "--------------------------------"
-rm -rf /var/lib/libvirt/images/test-02-centos-7.1-x86_64.qcow2
-rm -rf /var/lib/libvirt/images/test-03-centos-7.1-x86_64.qcow2
+rm -rf /var/lib/libvirt/images/test-02.example.com-centos-7.1-x86_64.qcow2
+rm -rf /var/lib/libvirt/images/test-03.example.com-centos-7.1-x86_64.qcow2
 
 echo "Delete VMs from etc/hosts"
 echo "-------------------------"
@@ -21,8 +21,8 @@ sed '/\.example\.com vm-test-/d' -i /etc/hosts
 
 echo "Create VMs"
 echo "----------"
-ip2=`virt-deploy create test-02 centos-7.1 -o memory=2048 password=pass | grep 'ip address:' | cut -d: -f2`
-ip3=`virt-deploy create test-03 centos-7.1 -o memory=2048 password=pass | grep 'ip address:' | cut -d: -f2`
+ip2=`virt-deploy create test-02.example.com centos-7.1 -o memory=2048 password=pass | grep 'ip address:' | cut -d: -f2`
+ip3=`virt-deploy create test-03.example.com centos-7.1 -o memory=2048 password=pass | grep 'ip address:' | cut -d: -f2`
 
 echo "Edit VMs on etc/hosts"
 echo "---------------------"
@@ -31,6 +31,6 @@ echo "$ip3    vm-test-03.example.com vm-test-03" >> /etc/hosts
 
 echo "Start VMs"
 echo "---------"
-virt-deploy start test-02-centos-7.1-x86_64
-virt-deploy start test-03-centos-7.1-x86_64
+virt-deploy start test-02.example.com-centos-7.1-x86_64
+virt-deploy start test-03.example.com-centos-7.1-x86_64
 
