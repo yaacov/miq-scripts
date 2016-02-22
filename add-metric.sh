@@ -16,6 +16,12 @@ secret=`oc get -n management-infra sa/management-admin --template='{{range .secr
 # create the metric pods
 # ----------------------
 
+# add metrics public url to master confiv file
+sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02/hawkular/metrics" /etc/origin/master/master-config.yaml
+
+# make the default node to be infra
+sed -i s/defaultNodeSelector:\ \"\"/defaultNodeSelector:\ \"region=infra\"/g /etc/origin/master/master-config.yaml
+
 # creat the metric pods, and set authentications
 git clone https://github.com/openshift/origin-metrics.git
 cd origin-metrics/
@@ -31,20 +37,14 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02,USE_PERSISTEN
 # watch the metric pods until all are running
 oc get pods --all-namespaces -w
 
-# oadm registry --config=/etc/origin/master/admin.kubeconfig --credentials=/etc/origin/master/openshift-registry.kubeconfig 
-
 # wait for casndra, hawkular and heapster pods to run then test
 curl -X GET https://vm-test-02/hawkular/metrics/status --insecure
 
 # create route to hawkular
 # ------------------------
 
-# add line to /etc/origin/master/master-config.yaml
-# assetConfig:
-# etricsPublicURL: https://vm-test-02/hawkular/metrics
-# and then reboot
-sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02/hawkular/metrics" /etc/origin/master/master-config.yaml
-
 # create route for comunicating with manageiq
-oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --selector='kubernetes.io/hostname=vm-test-02' --stats-port=1937 --host-network=false
+oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --stats-port=1937 --host-network=false
+
+# reboot
 
