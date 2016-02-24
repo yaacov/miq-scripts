@@ -5,11 +5,6 @@ if [ "$EUID" -eq 0 ]
   exit
 fi
 
-echo "Remove ssh fingerprints"
-echo "-----------------------"
-ssh-keygen -R "vm-test-02.example.com"
-ssh-keygen -R "vm-test-03.example.com"
-
 echo "Add root auth"
 echo "-------------"
 echo
