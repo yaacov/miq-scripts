@@ -9,9 +9,6 @@
 # add metrics public url to master config file
 sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
 
-# make the default node to be infra
-sed -i s/defaultNodeSelector:\ \"\"/defaultNodeSelector:\ \"region=infra\"/g /etc/origin/master/master-config.yaml
-
 # creat the metric pods, and set authentications
 git clone https://github.com/openshift/origin-metrics.git
 cd origin-metrics/
@@ -25,7 +22,7 @@ oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02.example.com,U
 # ------------------------
 
 # create route for comunicating with manageiq
-oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --stats-port=1937 --host-network=false
+oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --stats-port=1937 --host-network=false --selector='region=infra'
 
 # reboot
 # ------
