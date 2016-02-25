@@ -6,7 +6,7 @@
 # create the metric pods
 # ----------------------
 
-# add metrics public url to master confiv file
+# add metrics public url to master config file
 sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
 
 # make the default node to be infra
@@ -47,5 +47,5 @@ reboot
 # oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-#curl -X GET https://vm-test-02.example.com/hawkular/metrics/status --insecure
+# curl -X GET https://vm-test-02.example.com/hawkular/metrics/status --insecure
 
