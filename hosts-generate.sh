@@ -1,3 +1,16 @@
+#!/bin/bash
+
+if [ "$#" -eq 1 ]
+then
+  hostname_prefix="$1"
+else
+  echo "Usage: $0 hostname-prefix"
+  exit
+fi
+
+dir="$(dirname "$0")"
+
+sed s/'$hostname_prefix'/$hostname_prefix/g > "$dir/hosts.$hostname_prefix" <<EOF
 # This is an example of a bring your own (byo) host inventory
 
 # A host file for openshift-ansible ansible-playbook
@@ -20,10 +33,12 @@ openshift_use_manageiq=True
 
 # host group for masters
 [masters]
-vm-test-02.example.com
+vm-$hostname_prefix-02.example.com
 
 # host group for nodes
 [nodes]
-vm-test-02.example.com openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
-vm-test-03.example.com openshift_node_labels="{'region':'primary','zone':'west'}"
+vm-$hostname_prefix-02.example.com openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
+vm-$hostname_prefix-03.example.com openshift_node_labels="{'region':'primary','zone':'west'}"
+EOF
 
+echo "$dir/hosts.$hostname_prefix generated."

@@ -1,13 +1,23 @@
 #!/bin/bash
 
-# run this file as root on remote machine
-#   e.g. ssh root@vm-test-02.example.com 'bash -s' < add-metric.sh
+# run this file as root on master machine
+# e.g. (replace HOSTNAME-PREFIX with your chosen prefix):
+#   ssh root@vm-HOSTNAME-PREFIX-02.example.com 'bash -s HOSTNAME-PREFIX' < add-metric.sh
+# (or copy/checkout the script there and just run 'bash add-metric.sh HOSTNAME-PREFIX')
+
+if [ "$#" -eq 1 ]
+then
+  hostname_prefix="$1"
+else
+  echo "Usage: $0 hostname-prefix"
+  exit
+fi
 
 # create the metric pods
 # ----------------------
 
 # add metrics public url to master config file
-sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-test-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
+sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-$hostname_prefix-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
 
 # creat the metric pods, and set authentications
 git clone https://github.com/openshift/origin-metrics.git
@@ -16,7 +26,7 @@ oc create -f metrics-deployer-setup.yaml -n openshift-infra
 oadm policy add-role-to-user edit system:serviceaccount:openshift-infra:metrics-deployer -n openshift-infra
 oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
 oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
-oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-test-02.example.com,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
+oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-$hostname_prefix-02.example.com,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
 
 # create route to hawkular
 # ------------------------
@@ -49,5 +59,4 @@ reboot
 # oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-# curl -X GET https://vm-test-02.example.com/hawkular/metrics/status --insecure
-
+# curl -X GET https://vm-$hostname_prefix-02.example.com/hawkular/metrics/status --insecure
