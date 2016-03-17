@@ -11,7 +11,7 @@ Create VMs, edit file to set new VMs memory, password, copy ssh keys, generate a
 Contains sudo commands, will ask for password if required.
 Also has a couple interactive steps.
 
-# hosts.$hostname_prefix
+## hosts.$hostname_prefix
 
 A host file for openshift-ansible ansible-playbook (prepare.sh called `hosts-generate.sh foo` to create it).
 
