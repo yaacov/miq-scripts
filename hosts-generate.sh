@@ -8,7 +8,9 @@ else
   exit
 fi
 
-sed s/'$hostname_prefix'/"$hostname_prefix"/g > hosts.local <<EOF
+dir="$(dirname "$0")"
+
+sed s/'$hostname_prefix'/$hostname_prefix/g > "$dir/hosts.$hostname_prefix" <<EOF
 # This is an example of a bring your own (byo) host inventory
 
 # A host file for openshift-ansible ansible-playbook
@@ -38,3 +40,5 @@ vm-$hostname_prefix-02.example.com
 vm-$hostname_prefix-02.example.com openshift_node_labels="{'region':'infra','zone':'default'}" openshift_schedulable=true
 vm-$hostname_prefix-03.example.com openshift_node_labels="{'region':'primary','zone':'west'}"
 EOF
+
+echo "$dir/hosts.$hostname_prefix generated."
