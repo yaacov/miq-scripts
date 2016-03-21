@@ -20,7 +20,8 @@ def push_metric (prov, timestamp, interval = "daily")
     :net_usage_rate_average           => rand(1000),
     :derived_memory_available         => 8192,
     :derived_memory_used              => rand(8192),
-    :stat_containergroup_create_rate  => rand(100))
+    :stat_containergroup_create_rate  => rand(100),
+    :stat_containergroup_delete_rate  => rand(50))
 end
 
 def push_last_30_days(prov)
