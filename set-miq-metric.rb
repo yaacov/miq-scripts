@@ -14,14 +14,16 @@ def push_metric (prov, timestamp, interval = "daily")
     :capture_interval_name => interval,
     :timestamp => timestamp,
     :time_profile => TimeProfile.first,
-    :cpu_usage_rate_average           => rand(100),
-    :mem_usage_absolute_average       => rand(100),
-    :derived_vm_numvcpus              => 4,
-    :net_usage_rate_average           => rand(1000),
-    :derived_memory_available         => 8192,
-    :derived_memory_used              => rand(8192),
-    :stat_containergroup_create_rate  => rand(100),
-    :stat_containergroup_delete_rate  => rand(50))
+    :cpu_usage_rate_average                   => rand(100),
+    :mem_usage_absolute_average               => rand(100),
+    :derived_vm_numvcpus                      => 4,
+    :net_usage_rate_average                   => rand(1000),
+    :derived_memory_available                 => 8192,
+    :derived_memory_used                      => rand(8192),
+    :stat_container_group_create_rate         => rand(100),
+    :stat_container_group_delete_rate         => rand(50),
+    :stat_container_image_registration_rate   => rand(25)
+  )
 end
 
 def push_nodes_metric (prov, timestamp)
