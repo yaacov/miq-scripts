@@ -5,11 +5,10 @@ ENV['RAILS_ENV'] = ARGV[0] || 'development'
 DIR = File.dirname(__FILE__) 
 require DIR + '/../manageiq/config/environment'
 
-ems_id = "2"
-
 # create and run worker, metrics collector
 #-----------------------------------------
 
+ems_id = "2"
 #worker_class = ManageIQ::Providers::Kubernetes::ContainerManager::EventCatcher
 worker_class = ManageIQ::Providers::Kubernetes::ContainerManager::MetricsCollectorWorker
 runner_class = worker_class::Runner
