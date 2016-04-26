@@ -8,11 +8,11 @@ require DIR + '/../manageiq/config/environment'
 # create and run worker, metrics collector
 #-----------------------------------------
 
-ems_id = "2"
 #worker_class = ManageIQ::Providers::Kubernetes::ContainerManager::EventCatcher
 worker_class = ManageIQ::Providers::Kubernetes::ContainerManager::MetricsCollectorWorker
 runner_class = worker_class::Runner
 worker = worker_class.create_worker_record
+ems_id = "3"
 runner_cfg = {:guid => worker.guid, :ems_id => ems_id}
 runner = runner_class.new(runner_cfg)
 
