@@ -1,23 +1,22 @@
 #!/bin/bash
 
 # run this file as root on master machine
-# e.g. (replace HOSTNAME-PREFIX with your chosen prefix):
-#   ssh root@vm-HOSTNAME-PREFIX-02.example.com 'bash -s HOSTNAME-PREFIX' < add-metric.sh
-# (or copy/checkout the script there and just run 'bash add-metric.sh HOSTNAME-PREFIX')
+# e.g. (replace HOSTNAME with your chosen hostname):
+#   ssh root@HOSTNAME 'bash -s HOSTNAME' < add-metric.sh
+# (or copy/checkout the script there and just run 'bash add-metric.sh HOSTNAME')
 
 if [ "$#" -eq 1 ]
 then
-  hostname_prefix="$1"
+  hostname="$1"
 else
-  echo "Usage: $0 hostname-prefix"
-  exit
+  hostname="$HOSTNAME"
 fi
 
 # create the metric pods
 # ----------------------
 
 # add metrics public url to master config file
-sed -i "/assetConfig:/a\ \ metricsPublicURL: https://vm-$hostname_prefix-02.example.com/hawkular/metrics" /etc/origin/master/master-config.yaml
+sed -i "/assetConfig:/a\ \ metricsPublicURL: https://$hostname/hawkular/metrics" /etc/origin/master/master-config.yaml
 
 # creat the metric pods, and set authentications
 git clone https://github.com/openshift/origin-metrics.git
@@ -26,7 +25,7 @@ oc create -f metrics-deployer-setup.yaml -n openshift-infra
 oadm policy add-role-to-user edit system:serviceaccount:openshift-infra:metrics-deployer -n openshift-infra
 oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
 oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
-oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=vm-$hostname_prefix-02.example.com,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
+oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=$hostname,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
 
 # create route to hawkular
 # ------------------------
@@ -37,7 +36,7 @@ oadm router management-metrics --credentials=/etc/origin/master/openshift-router
 # reboot
 # ------
 
-reboot
+#reboot
 
 # get the openshift token
 # -----------------------
@@ -59,4 +58,4 @@ reboot
 # oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-# curl -X GET https://vm-$hostname_prefix-02.example.com/hawkular/metrics/status --insecure
+# curl -X GET https://$hostname/hawkular/metrics/status --insecure

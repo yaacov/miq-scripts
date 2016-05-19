@@ -19,5 +19,5 @@ ssh-copy-id root@$hostname
 scp /etc/yum.repos.d/fedora.repo "root@$hostname:/etc/yum.repos.d/fedora.repo"
 echo 'dnf upgrade -y' | ssh "root@$hostname"
 echo 'dnf groupinstall -y "System tools"' | ssh "root@$hostname"
-echo 'dnf install -y python2 python2-dnf libselinux-python libsemanage-python python2-firewall tar unzip bzip2' | ssh "root@$hostname"
+echo 'dnf install -y python2 python2-dnf libselinux-python libsemanage-python python2-firewall tar unzip bzip2 vim' | ssh "root@$hostname"
 
