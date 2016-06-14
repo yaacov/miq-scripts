@@ -18,7 +18,8 @@ end
 # insert a new openshift provider to the database
 # with authentication
 #
-# we asume default and hawkular 
+# we asume default and hawkular endpoints has the same
+# hostname and token
 #
 # name      new providers name
 # hostname  new providers hostname

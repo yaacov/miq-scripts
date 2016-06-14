@@ -15,9 +15,6 @@ fi
 # create the metric pods
 # ----------------------
 
-# add metrics public url to master config file
-sed -i "/assetConfig:/a\ \ metricsPublicURL: https://$hostname/hawkular/metrics" /etc/origin/master/master-config.yaml
-
 # creat the metric pods, and set authentications
 git clone https://github.com/openshift/origin-metrics.git
 cd origin-metrics/
@@ -26,12 +23,6 @@ oadm policy add-role-to-user edit system:serviceaccount:openshift-infra:metrics-
 oadm policy add-cluster-role-to-user cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
 oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
 oc process -f metrics.yaml -v HAWKULAR_METRICS_HOSTNAME=$hostname,USE_PERSISTENT_STORAGE=false | oc create -n openshift-infra -f -
-
-# create route to hawkular
-# ------------------------
-
-# create route for comunicating with manageiq
-oadm router management-metrics --credentials=/etc/origin/master/openshift-router.kubeconfig --service-account=router --ports='443:5000' --stats-port=1937 --host-network=false --selector='region=infra'
 
 # reboot
 # ------
