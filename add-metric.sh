@@ -66,7 +66,7 @@ oc delete secret metrics-deployer
 # ---------
 
 # watch the metric pods until all are running
-# oc get pods --all-namespaces -w
+oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-# curl -X GET https://$hostname/hawkular/metrics/status --insecure
+curl -X GET https://$hostname/hawkular/metrics/status --insecure
