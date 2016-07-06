@@ -7,8 +7,8 @@ require 'json'
 require 'time'
 
 options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: read-hawkular.rb [options]"
+optionparser = OptionParser.new do |opts|
+  opts.banner = "Usage: read-hawkular.rb -h <hostname> [options]"
 
   opts.on("-h", "--hostname=HOSTNAME", "Hawkular server hostname") do |v|
     options[:hostname] = v
@@ -31,9 +31,13 @@ OptionParser.new do |opts|
   opts.on("-b", "--bearer=BEARER", "The authorization token") do |v|
     options[:bearer] = v
   end
-end.parse!
+end
+optionparser.parse!
+if options[:hostname].nil?
+  puts optionparser.help
+  exit
+end
 
-options[:hostname] ||= 'yzamir-centos7-1.eng.lab.tlv.example.com'
 options[:node] ||= options[:hostname]
 options[:port] ||= 443
 options[:end] ||= Time.now.to_i * 1000
