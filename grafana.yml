@@ -1,0 +1,47 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: grafana
+spec:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    name: grafana
+---
+kind: Route
+apiVersion: v1
+metadata:
+  name: grafana
+spec:
+  host: yzamir-centos7-1.eng.lab.tlv.redhat.com
+  path: /
+  ports:
+  - port: 3000
+  to:
+    kind: Service
+    name: grafana
+---
+kind: DeploymentConfig
+apiVersion: v1
+metadata:
+  name: grafana
+spec:
+  replicas: 2
+  selector:
+    name: grafana
+  template:
+    metadata:
+      labels:
+        name: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+      serviceAccountName: useroot
+  expose: grafana
+
