@@ -1,3 +1,6 @@
+# oc create serviceaccount useroot
+# oc adm policy add-scc-to-user anyuid -z useroot
+
 kind: Service
 apiVersion: v1
 metadata:
@@ -19,6 +22,8 @@ spec:
   path: /
   ports:
   - port: 3000
+  tls:
+    termination: edge
   to:
     kind: Service
     name: grafana
@@ -38,7 +43,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana
+        image: yaacov/grafana-hawkular
         ports:
         - containerPort: 3000
           protocol: TCP
