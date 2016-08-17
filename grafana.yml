@@ -1,6 +1,10 @@
-# oc create serviceaccount useroot
-# oc adm policy add-scc-to-user anyuid -z useroot
+# oc adm policy add-scc-to-user anyuid -z grafana
 
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: grafana
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -47,6 +51,6 @@ spec:
         ports:
         - containerPort: 3000
           protocol: TCP
-      serviceAccountName: useroot
+      serviceAccountName: grafana
   expose: grafana
 
