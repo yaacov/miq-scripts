@@ -15,8 +15,8 @@ nodes
 ansible_ssh_user=root
 deployment_type=origin
 # Metric deploy is not working ?
-openshift_hosted_metrics_deploy=True
-hawkular_metrics_hostname=yzamir-centos7-1.eng.lab.tlv.redhat.com
+#openshift_hosted_metrics_deploy=True
+#hawkular_metrics_hostname=yzamir-centos7-1.eng.lab.tlv.redhat.com
 openshift_master_default_subdomain=eng.lab.tlv.redhat.com
 
 # Host group for masters
