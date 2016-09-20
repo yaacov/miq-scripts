@@ -42,7 +42,7 @@ def create_prov_with_auth(name, hostname, token)
                                                         :userid   => "_"}}])
   prov.save
 
-  EmsRefresh.refresh(prov)
+  #EmsRefresh.refresh(prov)
 end
 
 # ------------------------------------
@@ -58,4 +58,4 @@ token3 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY
 delete_providers
 create_prov_with_auth('Molecule', 'oshift01.eng.lab.tlv.redhat.com', token1)
 create_prov_with_auth('EngLab', 'yzamir-centos7-1.eng.lab.tlv.redhat.com', token2)
-create_prov_with_auth('QaLab', 'ose-master.qa.lab.tlv.redhat.com', token3)
+#create_prov_with_auth('QaLab', 'ose-master.qa.lab.tlv.redhat.com', token3)
