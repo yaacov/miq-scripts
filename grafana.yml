@@ -37,7 +37,7 @@ apiVersion: v1
 metadata:
   name: grafana
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     name: grafana
   template:
@@ -47,10 +47,9 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: yaacov/grafana-hawkular
+        image: yaacov/hawkular-grafana-datasource
         ports:
         - containerPort: 3000
           protocol: TCP
       serviceAccountName: grafana
   expose: grafana
-
