@@ -17,7 +17,7 @@ ssh-keygen -R $hostname
 ssh-copy-id root@$hostname
 
 echo 'yum install epel-release -y' | ssh "root@$hostname"
-#echo 'curl -o /etc/yum.repos.d/CentOS-OpenShift.repo https://tdawson.fedorapeople.org/centos/CentOS-OpenShift.repo' | ssh "root@$hostname"
+echo 'curl -o /etc/yum.repos.d/CentOS-OpenShift.repo https://tdawson.fedorapeople.org/centos/CentOS-OpenShift.repo' | ssh "root@$hostname"
 echo 'yum clean all' | ssh "root@$hostname"
 echo 'yum upgrade -y' | ssh "root@$hostname"
 echo 'yum clean all' | ssh "root@$hostname"
