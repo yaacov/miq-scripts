@@ -16,8 +16,7 @@ ansible_ssh_user=root
 deployment_type=origin
 # Metric deploy
 openshift_hosted_metrics_deploy=True
-openshift_hosted_metrics_deployer_version=v1.2.1
-#openshift_hosted_metrics_deployer_prefix=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/openshift3/
+openshift_hosted_metrics_write_access=True
 openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
 openshift_master_default_subdomain=eng.lab.tlv.redhat.com
 
