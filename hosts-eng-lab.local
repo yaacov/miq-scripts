@@ -10,13 +10,14 @@
 masters
 nodes
 
-# Will not work on versions below v1.3
-openshift_release=v1.3
-
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
 ansible_ssh_user=root
 deployment_type=origin
+
+# Will not work on versions below v1.3
+openshift_release=v1.3
+
 # Metric deploy
 openshift_hosted_metrics_deploy=True
 openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
