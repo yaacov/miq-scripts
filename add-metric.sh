@@ -48,8 +48,12 @@ exit
 
 # get the openshift tokens
 # ------------------------
-echo Authorization: Bearer $(oc sa get-token management-admin -n management-infra) > bearer_auth.txt; cat bearer_auth.txt; echo
-echo Authorization: Basic $(echo hawkular:$(oc -n openshift-infra export secret hawkular-metrics-account | grep password | cut -d: -f2 | sed 's/ //g' | base64 --decode) | base64 | cut -c 1-32) > basic_auth.txt; cat basic_auth.txt; echo
+# get bearer token
+oc sa get-token management-admin -n management-infra
+#echo Authorization: Bearer $(oc sa get-token management-admin -n management-infra) > bearer_auth.txt; cat bearer_auth.txt; echo
+# get basic authentication
+oc -n openshift-infra export secret hawkular-metrics-account | grep password | cut -d: -f2 | sed 's/ //g' | base64 --decode
+#echo Authorization: Basic $(echo hawkular:$(oc -n openshift-infra export secret hawkular-metrics-account | grep password | cut -d: -f2 | sed 's/ //g' | base64 --decode) | base64 | cut -c 1-32) > basic_auth.txt; cat basic_auth.txt; echo
 
 # cleaning up
 # -----------
