@@ -10,6 +10,9 @@
 masters
 nodes
 
+# Will not work on versions below v1.3
+openshift_release=v1.3
+
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
 ansible_ssh_user=root
@@ -21,9 +24,9 @@ openshift_master_default_subdomain=eng.lab.tlv.redhat.com
 
 # Host group for masters
 [masters]
-yzamir-centos7-1.eng.lab.tlv.redhat.com openshift_scheduleable=True
+yzamir-centos7-1.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
 yzamir-centos7-1.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
