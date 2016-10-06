@@ -20,7 +20,6 @@ deployment_type=origin
 # Metric deploy
 openshift_hosted_metrics_deploy=True
 openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
-openshift_master_default_subdomain=eng.lab.tlv.redhat.com
 
 # Host group for masters
 [masters]
