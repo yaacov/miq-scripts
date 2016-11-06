@@ -41,7 +41,7 @@ oc secrets new metrics-deployer nothing=/dev/null
 
 # Deploying metrics without Persistent Storage
 wget https://raw.githubusercontent.com/openshift/origin-metrics/master/metrics.yaml
-oc new-app -f metrics.yaml -p USE_PERSISTENT_STORAGE=false -p USER_WRITE_ACCESS=true -p HAWKULAR_METRICS_HOSTNAME=$hostname 
+oc new-app -f metrics.yaml -p USE_PERSISTENT_STORAGE=false -p HAWKULAR_METRICS_HOSTNAME=$hostname 
 
 # Exit
 exit
