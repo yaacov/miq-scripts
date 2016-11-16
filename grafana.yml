@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: yaacov/hawkular-grafana-datasource
+        image: hawkular/hawkular-grafana-datasource
         ports:
         - containerPort: 3000
           protocol: TCP
