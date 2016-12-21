@@ -63,3 +63,9 @@ ManageIQ::Providers::ContainerManager.all.each do |prov|
   push_last_30_days(prov)
   push_last_24_hours(prov)
 end
+
+ContainerProject.all.each do |prov|
+  push_last_30_days(prov)
+  push_last_24_hours(prov)
+end
+
