@@ -36,6 +36,9 @@ oadm policy add-role-to-user \
 oadm policy add-cluster-role-to-user \
     cluster-reader system:serviceaccount:openshift-infra:heapster
 
+# ?
+oc adm policy add-role-to-user view system:serviceaccount:openshift-infra:hawkular -n openshift-infra
+
 # Using Generated Self-Signed Certificates
 oc secrets new metrics-deployer nothing=/dev/null
 
