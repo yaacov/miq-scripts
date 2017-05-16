@@ -27,9 +27,9 @@ enable_excluders=false
 
 # Host group for masters
 [masters]
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+yzamir-centos7-3.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
 #yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
