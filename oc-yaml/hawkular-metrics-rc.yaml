@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  creationTimestamp: null
+  generation: 1
+  labels:
+    metrics-infra: hawkular-metrics
+    name: hawkular-metrics
+  name: hawkular-metrics
+spec:
+  replicas: 1
+  selector:
+    name: hawkular-metrics
+  template:
+    serviceAccountName: sa-host-access
+    dnsPolicy: ClusterFirst
+    metadata:
+      creationTimestamp: null
+      labels:
+        metrics-infra: hawkular-metrics
+        name: hawkular-metrics
+    spec:
+      containers:
+      - image: yaacov/mohawk
+        name: hawkular-metrics
+        ports:
+        - containerPort: 8443
+          name: https-endpoint
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /hawkular-metrics-certs
+          name: hawkular-metrics-certs
+        env:
+        - name: HAWKULAR_FILE_PEM
+          value: /hawkular-metrics-certs/tls.crt
+        - name: HAWKULAR_FILE_KEY
+          value: /hawkular-metrics-certs/tls.key
+      volumes:
+      - name: hawkular-metrics-certs
+        secret:
+          defaultMode: 420
+          secretName: hawkular-metrics-certs
+
+
+
+
