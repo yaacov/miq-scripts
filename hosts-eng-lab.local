@@ -22,10 +22,11 @@ openshift_release=3.6
 openshift_image_tag=v3.6.0-alpha.2
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability
+
 # Metric deploy
-openshift_hosted_metrics_deploy=True
-openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
-openshift_master_default_subdomain=yzamir-centos7-1.eng.lab.tlv
+#openshift_hosted_metrics_deploy=True
+#openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
+#openshift_master_default_subdomain=yzamir-centos7-1.eng.lab.tlv
 
 # Host group for masters
 [masters]
