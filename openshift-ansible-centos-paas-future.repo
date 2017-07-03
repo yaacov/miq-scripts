@@ -1,0 +1,6 @@
+[centos-future]
+name=CentOS OpenShift Origin Future
+baseurl=https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/
+enabled=1
+gpgcheck=0
+

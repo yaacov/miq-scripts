@@ -10,20 +10,22 @@
 masters
 nodes
 
+[nfs]
+yzamir-centos7-3.eng.lab.tlv.redhat.com
+
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
 ansible_ssh_user=root
 deployment_type=origin
-enable_excluders=false
-#enable_docker_excluder=false
 
-# Will not work on versions below v1.3
-#openshift_release=v1.3
+openshift_release=3.6
+openshift_image_tag=v3.6.0-alpha.2
 
+openshift_disable_check=docker_storage,disk_availability,memory_availability
 # Metric deploy
-#openshift_hosted_metrics_deploy=True
-#openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
-#openshift_master_default_subdomain=yzamir-centos7-1.eng.lab.tlv
+openshift_hosted_metrics_deploy=True
+openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
+openshift_master_default_subdomain=yzamir-centos7-1.eng.lab.tlv
 
 # Host group for masters
 [masters]
@@ -33,3 +35,4 @@ yzamir-centos7-3.eng.lab.tlv.redhat.com
 [nodes]
 yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
 #yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
+#yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
