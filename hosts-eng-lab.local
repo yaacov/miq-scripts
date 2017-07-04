@@ -11,7 +11,7 @@ masters
 nodes
 
 [nfs]
-yzamir-centos7-3.eng.lab.tlv.redhat.com
+yzamir-centos7-2.eng.lab.tlv.redhat.com
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -20,7 +20,7 @@ deployment_type=origin
 
 openshift_release=3.6
 openshift_image_tag=v3.6.0-alpha.2
-
+openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
 openshift_disable_check=docker_storage,disk_availability,memory_availability
 
 # Metric deploy
@@ -30,10 +30,10 @@ openshift_disable_check=docker_storage,disk_availability,memory_availability
 
 # Host group for masters
 [masters]
-yzamir-centos7-3.eng.lab.tlv.redhat.com
+yzamir-centos7-2.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
 #yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
 #yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
