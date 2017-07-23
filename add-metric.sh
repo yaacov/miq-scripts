@@ -44,7 +44,7 @@ oc secrets new metrics-deployer nothing=/dev/null
 
 # Deploying metrics without Persistent Storage
 wget https://raw.githubusercontent.com/openshift/origin-metrics/master/metrics.yaml
-oc new-app -f metrics.yaml -p USE_PERSISTENT_STORAGE=false -p HAWKULAR_METRICS_HOSTNAME=$hostname 
+oc new-app -f metrics.yaml -p USE_PERSISTENT_STORAGE=false -p HAWKULAR_METRICS_HOSTNAME=$(hostname)
 
 # Exit
 exit
@@ -76,4 +76,4 @@ oc delete secret metrics-deployer
 oc get pods --all-namespaces -w
 
 # wait for casndra, hawkular and heapster pods to run then test
-curl -X GET https://$hostname/hawkular/metrics/status --insecure
+curl -X GET https://$(hostname)/hawkular/metrics/status --insecure
