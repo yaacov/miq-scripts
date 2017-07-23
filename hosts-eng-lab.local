@@ -9,9 +9,7 @@
 [OSEv3:children]
 masters
 nodes
-
-[nfs]
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+nfs
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -19,21 +17,23 @@ ansible_ssh_user=root
 deployment_type=origin
 
 openshift_release=3.6
-openshift_image_tag=v3.6.0-alpha.2
-openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
+openshift_image_tag=v3.6.0-rc.0
+
+# latest openshift_additional_repos is here:
+# echo $(curl https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/.latest)/artifacts/rpms
+openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/886/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
+#openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
+
 openshift_disable_check=docker_storage,disk_availability,memory_availability
 
-# Metric deploy
-#openshift_hosted_metrics_deploy=True
-#openshift_hosted_metrics_public_url=yzamir-centos7-1.eng.lab.tlv.redhat.com
-#openshift_master_default_subdomain=yzamir-centos7-1.eng.lab.tlv
+[nfs]
+yzamir-centos7-1.eng.lab.tlv.redhat.com
 
 # Host group for masters
 [masters]
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+yzamir-centos7-1.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
-#yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
-#yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
+yzamir-centos7-1.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+#yzamir-centos7-X.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"
