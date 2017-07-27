@@ -21,7 +21,7 @@ openshift_image_tag=v3.6.0-rc.0
 
 # latest openshift_additional_repos is here:
 # echo $(curl https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/.latest)/artifacts/rpms
-openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/912/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
+openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/4872/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability

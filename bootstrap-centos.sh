@@ -17,8 +17,16 @@ ssh-keygen -R $hostname
 ssh-copy-id root@$hostname
 
 echo 'yum install epel-release -y' | ssh "root@$hostname"
-echo 'curl -o /etc/yum.repos.d/CentOS-OpenShift.repo https://tdawson.fedorapeople.org/centos/CentOS-OpenShift.repo' | ssh "root@$hostname"
 echo 'yum clean all' | ssh "root@$hostname"
 echo 'yum upgrade -y' | ssh "root@$hostname"
 echo 'yum clean all' | ssh "root@$hostname"
 echo 'yum install centos-release-paas-common centos-release-openshift-origin docker -y' | ssh "root@$hostname"
+
+exit
+
+# just copy and run on machine:
+yum install epel-release -y
+yum clean all
+yum upgrade -y
+yum clean all
+yum install centos-release-paas-common centos-release-openshift-origin docker -y
