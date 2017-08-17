@@ -9,7 +9,6 @@
 [OSEv3:children]
 masters
 nodes
-nfs
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]

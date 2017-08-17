@@ -37,14 +37,18 @@ oadm policy add-cluster-role-to-user \
     cluster-reader system:serviceaccount:openshift-infra:heapster
 
 # ?
-oc adm policy add-role-to-user view system:serviceaccount:openshift-infra:hawkular -n openshift-infra
+oadm policy add-role-to-user \
+    view system:serviceaccount:openshift-infra:hawkular -n openshift-infra
 
 # Using Generated Self-Signed Certificates
 oc secrets new metrics-deployer nothing=/dev/null
 
 # Deploying metrics without Persistent Storage
 wget https://raw.githubusercontent.com/openshift/origin-metrics/master/metrics.yaml
-oc new-app -f metrics.yaml -p USE_PERSISTENT_STORAGE=false -p HAWKULAR_METRICS_HOSTNAME=$(hostname)
+oc new-app -f metrics.yaml \
+    -p USE_PERSISTENT_STORAGE=false \
+    -p HAWKULAR_METRICS_HOSTNAME=$(hostname) \
+    -p IMAGE_VERSION=v3.6.0-rc.0
 
 # Exit
 exit

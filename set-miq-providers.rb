@@ -24,7 +24,8 @@ end
 # name      new providers name
 # hostname  new providers hostname
 # token     new providers token
-def create_prov_with_auth(name, hostname, token)
+def create_prov_with_auth(name, hostname, token, metrics_hostname=nil, role=:hawkular)
+  metrics_hostname ||= hostname
   prov = ManageIQ::Providers::Openshift::ContainerManager.new(
     :name                      => name,
     :zone                      => Zone.last,
@@ -34,11 +35,11 @@ def create_prov_with_auth(name, hostname, token)
                                                         :verify_ssl => false},
                                     :authentication => {:role     => :bearer,
                                                         :auth_key => token}},
-                                   {:endpoint       => {:role       => :hawkular,
-                                                        :hostname   => hostname,
+                                   {:endpoint       => {:role       => role,
+                                                        :hostname   => metrics_hostname,
                                                         :port       => "443",
                                                         :verify_ssl => false},
-                                    :authentication => {:role     => :hawkular,
+                                    :authentication => {:role     => role,
                                                         :auth_key => token}}])
   prov.save
   prov.authentication_check_types(:bearer, :hawkular)
@@ -53,16 +54,16 @@ token1 =
 token2 =
 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtYW5hZ2VtZW50LWluZnJhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hbmFnZW1lbnQtYWRtaW4tdG9rZW4tejJjZDciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFuYWdlbWVudC1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImExOGY3MTgwLTZkMTgtMTFlNy04ZGVkLTAwMWE0YTIzMTRkNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptYW5hZ2VtZW50LWluZnJhOm1hbmFnZW1lbnQtYWRtaW4ifQ.cck_tbnkibOyYfZ4TeDSKNQTb-K3TZHzFNIsaSF5fxvxBQkPUC3iKjzkRYMFbuw6_kQ6aICItRNgRG6KfYwIlyE679W5g7QKsp8aEpgqbE9aWn6ipsBagnZpWK3U0Vglunl3dxngrA8z4aNRP4GvEbhVMSyedzzVPV1SYzoC071skokt6HwkDRnuL9lLZh9InWiHt85kE6gykPxXmbBvf9Cw1IWA0KeRupi6BWfdw8Em-ESNeE6Brhaiz7D8AyTACjJ0BC0XKB3-YCIOrb-XPqDWdl7BD9gMX1CFyW4N3eHDzBGHnf7sE2KAAI-97KDE37-TagUfqDnotoi2MLuFDw'
 token3 =
-'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtYW5hZ2VtZW50LWluZnJhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hbmFnZW1lbnQtYWRtaW4tdG9rZW4tdmt4dnYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFuYWdlbWVudC1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImY1MTk0NWFhLTZmODYtMTFlNy1iNDczLTAwMWE0YTIzMTRkNyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptYW5hZ2VtZW50LWluZnJhOm1hbmFnZW1lbnQtYWRtaW4ifQ.3-qJT_9Vc4gMQ5Vb5gpIUhHHZngadDyo8LAwqmYaPhycZDgDJSX2FCEwkZP1A6V2V9YQc-c7IV4nT0Rkj8BOqcjuR49dVe2aEuW6iJsUFCWHS544oKVR8_sTj-5SNVQxQx5um9Bxkg3Go9YJx3hJqIJMfqh0bNVwepG868iDZ6xFtbmfzoh238y8ynCk_ZoqN_T2oRCtvgCs5k26VRJ6srC3VZ2z9yM1rvt3q-V3duBJQHH-QmTRfT9i8rIGrVnePQRHjgoeLhjqKHDi88i_wq7tyPLRo58NhPCndKI4fFCcTz3wy6SxF-O2ECzCUyEECP6VmTrM5aMOyRdtohh7eA'
+'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtYW5hZ2VtZW50LWluZnJhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hbmFnZW1lbnQtYWRtaW4tdG9rZW4tejBncmYiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFuYWdlbWVudC1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjEzYjgxZjI0LTcyOTktMTFlNy04MjIxLTAwMWE0YTIzMTRkNyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptYW5hZ2VtZW50LWluZnJhOm1hbmFnZW1lbnQtYWRtaW4ifQ.G_ht7AJi1sd73vH8fO8_fZyjYA2-Qpz_M2DJ0JrjiBTBzISfJcUZETLN_ZRQUhqicWtEe3YWmN2lVY-7OoAl24v5mr-_9Qax_p44TUzBgNqng0wl-kXi4Ay6uoTtf470w0QuBMgJGnB05-nxA52G24doZQG493wGqxmKr5OLePJ0cg7vlG6wUjxznbG-u8lQM1qt59CHKzxPc_pgWMtSBHlXisuYV9dwNFLlfvwIHQZwc1qq72eMud9PtorD6QontuHAARLNTieCtrjlKk6-EFH5zOWXDukNyFPcMD43FGLqBxFkqboHaa04iEivViUrmXVvB6CqkOZoNPxSrG98LQ'
 
 # ---------------------------
 # Delete all curent providers
 # ---------------------------
-delete_providers
+#delete_providers
 
 # ---------------------------
 # Create new curent providers
 # ---------------------------
 create_prov_with_auth('EngLab', 'yzamir-centos7-1.eng.lab.tlv.redhat.com', token1)
 create_prov_with_auth('EngLab-mohawk', 'yzamir-centos7-2.eng.lab.tlv.redhat.com', token2)
-create_prov_with_auth('EngLab-prometheus', 'yzamir-centos7-3.eng.lab.tlv.redhat.com', token3)
+create_prov_with_auth('EngLab-prometheus', 'yzamir-centos7-3.eng.lab.tlv.redhat.com', token3, 'prometheus.10.35.19.248.nip.io', :prometheus)
