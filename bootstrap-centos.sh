@@ -20,7 +20,7 @@ echo 'yum install epel-release -y' | ssh "root@$hostname"
 
 echo 'curl -o /etc/yum.repos.d/CentOS-OpenShift.repo https://tdawson.fedorapeople.org/centos/CentOS-OpenShift.repo' | ssh "root@$hostname"
 echo 'curl -o /etc/yum.repos.d/CentOS7.repo https://raw.githubusercontent.com/yaacov/miq-scripts/master/yum.repos.d/CentOS7.repo' | ssh "root@$hostname"
-echo 'curl -o /etc/yum.repos.d/CentOS7-Base.repo https://raw.githubusercontent.com/yaacov/miq-scripts/master/yum.repos.d/CentOS7-Base.repo' | ssh "root@$hostname"
+echo 'curl -o /etc/yum.repos.d/CentOS7-Base.repo https://raw.githubusercontent.com/yaacov/miq-scripts/master/yum.repos.d/CentOS-Base.repo' | ssh "root@$hostname"
 
 echo 'yum clean all' | ssh "root@$hostname"
 echo 'yum upgrade -y' | ssh "root@$hostname"
