@@ -1,0 +1,20 @@
+- hosts: 127.0.0.1
+  tasks:
+  - name: Update a provider in ManageIQ
+    manageiq_provider:
+      name: 'EngLab'
+      endpoints:
+        default:
+          auth_key: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJtYW5hZ2VtZW50LWluZnJhIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6Im1hbmFnZW1lbnQtYWRtaW4tdG9rZW4taHY5M3EiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoibWFuYWdlbWVudC1hZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjFjY2FiOTZlLTZmODQtMTFlNy05ZDNjLTAwMWE0YTIzMTRkNSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDptYW5hZ2VtZW50LWluZnJhOm1hbmFnZW1lbnQtYWRtaW4ifQ.I2xG6ORylR7zxjJHb-DnNqKG5Ae37tYSYSvcsX4YpaW1ktY3oVT2CM9GBtDwkS6TY3o7wqvF4lpkYgGcv5rANLAgQT3WKFO1207RE1plTca85nMMIiZZkmsWpCa4U__PEOHv54LJ-hSHO8LTq1TlWRX0lL60Bxr-j79BmiEA05FN8u84uFRYJQ7JNWk-qII23eXOs4Zkq09zWUn8NGpeVa-mIszWvqUdrknvRtvvtCT0EkvKU5Odnugvi8DTaH_reInHdRo8y4_Csxem8SFAnCvEBzU4EIg1nUPSoD4sFGeljOC7v6EWg5q0408xmFBg1_oS5J8SeqNzZK57sCqn3w'
+          hostname: 'yzamir-centos7-1.eng.lab.tlv.redhat.com'
+          port: 8443
+          verify_ssl: False
+        metrics:
+          hostname: 'yzamir-centos7-1.eng.lab.tlv.redhat.com'
+          port: 443
+          verify_ssl: False
+      manageiq_connection:
+        url: 'http://127.0.0.1:3000'
+        username: 'admin'
+        password: 'smartvm'
+        verify_ssl: False

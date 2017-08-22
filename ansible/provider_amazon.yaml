@@ -1,0 +1,17 @@
+- hosts: 127.0.0.1
+  tasks:
+  - name: Create a new provider in ManageIQ
+    manageiq_provider:
+      name: 'EngLabAmazon'
+      type: 'Amazon'
+      provider_region: 'us-east-1'
+      endpoints:
+        default:
+          hostname: 'yzamir-centos7-amazon.eng.lab.tlv.redhat.com'
+          userid: 'hello'
+          password: 'world'
+      manageiq_connection:
+        url: 'http://127.0.0.1:3000'
+        username: 'admin'
+        password: 'smartvm'
+        verify_ssl: False

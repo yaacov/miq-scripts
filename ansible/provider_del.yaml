@@ -1,0 +1,11 @@
+- hosts: 127.0.0.1
+  tasks:
+  - name: Delete a provider in ManageIQ
+    manageiq_provider:
+      state: 'absent'
+      name: 'EngLab'
+      manageiq_connection:
+        url: 'http://127.0.0.1:3000'
+        username: 'admin'
+        password: 'smartvm'
+        verify_ssl: False
