@@ -25,6 +25,9 @@ openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://storage.
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability
 
+[etcd]
+yzamir-centos7-2.eng.lab.tlv.redhat.com
+
 [nfs]
 yzamir-centos7-2.eng.lab.tlv.redhat.com
 
