@@ -3,7 +3,7 @@
 # A host file for openshift-ansible ansible-playbook
 # ansible-playbook ./playbooks/byo/config.yml -i <PATH-TO-FILE>/hosts.local
 # e.g. when run from openshift-ansible source dir:
-#      ansible-playbook playbooks/byo/config.yml -i ../miq-scripts/hosts-eng-lab.local
+#      ansible-playbook playbooks/byo/config.yml -i ../AP-2017-OpenShift/inventory.ini
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -21,21 +21,26 @@ openshift_release=3.6
 # latest openshift_additional_repos is here:
 # echo $(curl https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/.latest)/artifacts/rpms
 #openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/1135/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
-openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
+#openshift_additional_repos=[{'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability,package_version
 
 [etcd]
-yzamir-centos7-1.eng.lab.tlv.redhat.com
+#yzamir-centos7-2.eng.lab.tlv.redhat.com
+openshift.example.com
 
 [nfs]
-yzamir-centos7-1.eng.lab.tlv.redhat.com
+#yzamir-centos7-2.eng.lab.tlv.redhat.com
+openshift.example.com
 
 # Host group for masters
 [masters]
-yzamir-centos7-1.eng.lab.tlv.redhat.com
+#yzamir-centos7-2.eng.lab.tlv.redhat.com
+openshift.example.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-1.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+#yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+openshift.example.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+
 #yzamir-centos7-X.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'users', 'zone': 'default'}"

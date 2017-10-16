@@ -43,7 +43,7 @@ def create_prov_with_auth(name, hostname, token, metrics_hostname=nil, role=:haw
                                                         :auth_key => token}}])
   prov.save
   prov.authentication_check_types(:bearer, :hawkular)
-  EmsRefresh.refresh(prov)
+  #EmsRefresh.refresh(prov)
 end
 
 # ------
@@ -65,5 +65,5 @@ delete_providers
 # Create new curent providers
 # ---------------------------
 create_prov_with_auth('EngLab', 'yzamir-centos7-1.eng.lab.tlv.redhat.com', token1, 'prometheus.10.35.19.246.nip.io', :prometheus)
-#create_prov_with_auth('EngLab-mohawk', 'yzamir-centos7-2.eng.lab.tlv.redhat.com', token2)
+create_prov_with_auth('EngLab-mohawk', 'yzamir-centos7-2.eng.lab.tlv.redhat.com', token2)
 #create_prov_with_auth('EngLab-prometheus', 'yzamir-centos7-3.eng.lab.tlv.redhat.com', token3, 'prometheus.10.35.19.248.nip.io', :prometheus)
