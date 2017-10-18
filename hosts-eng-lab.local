@@ -15,6 +15,8 @@ nodes
 ansible_ssh_user=root
 deployment_type=origin
 
+openshift_use_manageiq=true
+
 openshift_release=3.7
 openshift_image_tag=latest
 
@@ -29,9 +31,9 @@ openshift_disable_check=docker_storage,disk_availability,memory_availability,pac
 #yzamir-centos7-2.eng.lab.tlv.redhat.com
 mas-1.example.com
 
-[nfs]
+#[nfs]
 #yzamir-centos7-2.eng.lab.tlv.redhat.com
-mas-1.example.com
+#mas-1.example.com
 
 # Host group for masters
 [masters]
