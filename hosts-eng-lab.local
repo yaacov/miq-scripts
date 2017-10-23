@@ -3,7 +3,7 @@
 # A host file for openshift-ansible ansible-playbook
 # ansible-playbook ./playbooks/byo/config.yml -i <PATH-TO-FILE>/hosts.local
 # e.g. when run from openshift-ansible source dir:
-#      ansible-playbook playbooks/byo/config.yml -i ../AP-2017-OpenShift/inventory.ini
+#      ansible-playbook playbooks/byo/config.yml -i ../miq-scripts/hosts-eng-lab.local
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -14,15 +14,14 @@ nodes
 [OSEv3:vars]
 ansible_ssh_user=root
 deployment_type=origin
-
-openshift_use_manageiq=true
+#openshift_use_manageiq=true
 
 openshift_release=3.7
 openshift_image_tag=latest
 
 # latest openshift_additional_repos is here:
 # echo $(curl https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/.latest)/artifacts/rpms
-openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/1732/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
+openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/1774/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
 #openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability,package_version

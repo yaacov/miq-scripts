@@ -16,13 +16,15 @@ fi
 ssh-keygen -R $hostname
 ssh-copy-id root@$hostname
 
-echo 'yum install epel-release -y' | ssh "root@$hostname"
+#echo 'yum install epel-release -y' | ssh "root@$hostname"
 
 #echo 'curl -o /etc/yum.repos.d/CentOS-OpenShift.repo https://tdawson.fedorapeople.org/centos/CentOS-OpenShift.repo' | ssh "root@$hostname"
 #echo 'curl -o /etc/yum.repos.d/CentOS7.repo https://raw.githubusercontent.com/yaacov/miq-scripts/master/yum.repos.d/CentOS7.repo' | ssh "root@$hostname"
 #echo 'curl -o /etc/yum.repos.d/CentOS7-Base.repo https://raw.githubusercontent.com/yaacov/miq-scripts/master/yum.repos.d/CentOS-Base.repo' | ssh "root@$hostname"
 
-echo 'yum clean all' | ssh "root@$hostname"
+#echo 'yum clean all' | ssh "root@$hostname"
+#echo 'yum upgrade -y' | ssh "root@$hostname"
+#echo 'yum clean all' | ssh "root@$hostname"
+echo 'yum install epel-release centos-release-paas-common centos-release-openshift-origin docker wget vim -y' | ssh "root@$hostname"
 echo 'yum upgrade -y' | ssh "root@$hostname"
-echo 'yum clean all' | ssh "root@$hostname"
-echo 'yum install centos-release-paas-common centos-release-openshift-origin docker -y' | ssh "root@$hostname"
+
