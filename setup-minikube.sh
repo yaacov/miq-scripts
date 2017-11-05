@@ -19,7 +19,7 @@ kubectl get secret $SECRET_NAME -o yaml | grep token | head -n 1 - |  cut -d' ' 
 curl -Lo https://raw.githubusercontent.com/MohawkTSDB/mohawk-container/master/mohawk-k8s-with-crt.yaml
 
 # create the pods
-kubectl create -f mohawk-k8s.yaml
+kubectl create -f mohawk-k8s-with-crt.yaml
 
 # check the running pods
 #   shoule have mohawk and heapster pods
