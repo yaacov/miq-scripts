@@ -35,13 +35,27 @@ end
 def push_nodes_metric (prov, timestamp)
   prov.container_nodes.each do |node|
     node.metric_rollups << MetricRollup.create(
-      :capture_interval_name      => "hourly", 
+      :capture_interval_name      => "hourly",
       :timestamp                  => timestamp,
-      :cpu_usage_rate_average     => rand(100), 
-      :mem_usage_absolute_average => rand(100), 
-      :derived_vm_numvcpus        => 4, 
-      :net_usage_rate_average     => rand(1000), 
-      :derived_memory_available   => 8192, 
+      :cpu_usage_rate_average     => rand(100),
+      :mem_usage_absolute_average => rand(100),
+      :derived_vm_numvcpus        => 4,
+      :net_usage_rate_average     => rand(1000),
+      :derived_memory_available   => 8192,
+      :derived_memory_used        => rand(8192))
+  end
+end
+
+def push_container_metric (prov, timestamp)
+  prov.containers.each do |node|
+    node.metric_rollups << MetricRollup.create(
+      :capture_interval_name      => "hourly",
+      :timestamp                  => timestamp,
+      :cpu_usage_rate_average     => rand(100),
+      :mem_usage_absolute_average => rand(100),
+      :derived_vm_numvcpus        => 4,
+      :net_usage_rate_average     => rand(1000),
+      :derived_memory_available   => 8192,
       :derived_memory_used        => rand(8192))
   end
 end
@@ -53,6 +67,7 @@ end
 def push_last_24_hours(prov)
   (0 .. 24).each { |x| push_metric(prov, x.hours.ago, "hourly") }
   (0 .. 24).each { |x| push_nodes_metric(prov, x.hours.ago) }
+  (0 .. 24).each { |x| push_container_metric(prov, x.hours.ago) }
 end
 
 # --------------------
@@ -68,4 +83,3 @@ ContainerProject.all.each do |prov|
   push_last_30_days(prov)
   push_last_24_hours(prov)
 end
-

@@ -18,23 +18,27 @@ deployment_type=origin
 openshift_release=3.7
 openshift_image_tag=latest
 
+openshift_enable_service_catalog=false
+template_service_broker_install=false
+ansible_service_broker_install=false
+
 # latest openshift_additional_repos is here:
 # echo $(curl https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/.latest)/artifacts/rpms
-openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/1810/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
-#openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
+# openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://storage.googleapis.com/origin-ci-test/branch-logs/origin/master/builds/160/artifacts/rpms', 'enabled': 1, 'gpgcheck': 0}]
+openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'baseurl': 'https://buildlogs.centos.org/centos/7/paas/x86_64/openshift-future/', 'enabled': 1, 'gpgcheck': 0}]
 
 openshift_disable_check=docker_storage,disk_availability,memory_availability,package_version
 
 [etcd]
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+yzamir-centos7-3.eng.lab.tlv.redhat.com
 
-#[nfs]
-#yzamir-centos7-2.eng.lab.tlv.redhat.com
+# [nfs]
+# yzamir-centos7-2.eng.lab.tlv.redhat.com
 
 # Host group for masters
 [masters]
-yzamir-centos7-2.eng.lab.tlv.redhat.com
+yzamir-centos7-3.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-2.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
