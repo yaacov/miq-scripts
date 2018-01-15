@@ -3,7 +3,7 @@
 # A host file for openshift-ansible ansible-playbook
 # ansible-playbook ./playbooks/byo/config.yml -i <PATH-TO-FILE>/hosts.local
 # e.g. when run from openshift-ansible source dir:
-#      ansible-playbook playbooks/byo/config.yml -i ../miq-scripts/hosts-eng-lab.local
+#      ansible-playbook playbooks/byo/openshift-cluster/config.yml -i ../miq-scripts/hosts-eng-lab.local
 
 # Create an OSEv3 group that contains the masters and nodes groups
 [OSEv3:children]
@@ -30,15 +30,17 @@ openshift_additional_repos=[{'name': 'centos-future', 'id': 'centos-future', 'ba
 openshift_disable_check=docker_storage,disk_availability,memory_availability,package_version
 
 [etcd]
-yzamir-centos7-3.eng.lab.tlv.redhat.com
+vm-48-138.eng.lab.tlv.redhat.com
 
 # [nfs]
 # yzamir-centos7-2.eng.lab.tlv.redhat.com
 
 # Host group for masters
 [masters]
-yzamir-centos7-3.eng.lab.tlv.redhat.com
+vm-48-138.eng.lab.tlv.redhat.com
 
 # Host group for nodes
 [nodes]
-yzamir-centos7-3.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_scheduleable=True
+vm-48-138.eng.lab.tlv.redhat.com
+vm-48-139.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+vm-48-140.eng.lab.tlv.redhat.com openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
